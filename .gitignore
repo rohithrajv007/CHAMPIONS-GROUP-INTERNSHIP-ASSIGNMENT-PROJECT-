@@ -1,0 +1,14 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore model & embedding artifacts
+artifacts/*.joblib
+artifacts/*.json
+
+# Ignore dataset files (optional if private)
+data/*.csv
+
+# Ignore local env
+.env
+.venv/
