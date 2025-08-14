@@ -214,6 +214,16 @@ streamlit run app/app_streamlit.py
 - Optionally turn into a REST API with Flask.
 
 ---
+## Example Images
+
+![Screenshot 1](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020423.png)
+
+![Screenshot 2](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020521.png)
+
+![Screenshot 3](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020632.png)
+
+![Screenshot 4](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020641.png)
+
 
 
 
