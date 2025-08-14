@@ -5,9 +5,8 @@ A machine learning–powered app that predicts the likelihood of a LinkedIn user
 **AWS Certified Machine Learning – Specialty** credential based on their **skills** and **work experience**.
 
 It provides:
-
 - **Scenario 1:** Instant detection if a certification is explicitly listed.  
-- **Scenario 2:** Similarity-based scoring for uncertified profiles using pretrained embeddings.  
+- **Scenario 2:** Similarity-based scoring for uncertified profiles using pretrained embeddings **with relevant skill filtering**.  
 - A **ranked JSON output** sorted by confidence score.  
 - A clean **Streamlit web interface** for CSV uploads & downloads.
 
@@ -36,7 +35,7 @@ LinkedIn profiles often contain **skills** and **work experience**. In many case
 
 Our tool evaluates both situations:
 - **If the certificate is listed** → we output 100% certainty.
-- **If the certificate is not listed** → we compute a similarity measure between the user’s skill/work profile and those of known certified users.
+- **If the certificate is not listed** → we compute a similarity measure between the user’s skill/work profile and those of known certified users, filtering to only relevant AWS ML skills to improve scoring accuracy.
 
 ---
 
@@ -50,7 +49,8 @@ Our tool evaluates both situations:
 
 ### **Scenario 2 — Similarity-Based Scoring**
 - For users **without** explicit certifications:
-  - Generate embeddings of their `skills` and `work_experience` using a **Sentence-BERT** model (`all-MiniLM-L6-v2`).
+  - **NEW:** Filter the skills text to retain only **relevant AWS ML skills** from a whitelist, reducing noise from unrelated skills.
+  - Generate embeddings of filtered `skills` and full `work_experience` using a **Sentence-BERT** model (`all-MiniLM-L6-v2`).
   - Compare each embedding to **reference embeddings** computed from certified profiles (train set only).
   - Score = `(skills_sim * 0.5 + work_sim * 0.5) * 100`
   - Cap maximum score at **95%** to reflect uncertainty without certification.
@@ -60,10 +60,10 @@ Our tool evaluates both situations:
 ---
 
 ## 📊 Model & Approach
-
 We deliberately use a **semantic similarity model** instead of a classifier because:
 - Text data from LinkedIn is unstructured and sparse (skills vary widely in naming).
 - Semantic embeddings let us **capture meaning** (e.g., “AWS SageMaker” ~ “AWS Machine Learning Service”) even if wording differs.
+- **Enhancement:** By filtering only relevant AWS ML skills before embedding, we reduce score drops caused by unrelated skills in a candidate's profile while keeping high similarity for truly relevant skill sets.
 - This design works perfectly for **low-data environments** — as long as we have a few certified examples, we can score new inputs.
 
 **Model:**  
@@ -77,7 +77,6 @@ We deliberately use a **semantic similarity model** instead of a classifier beca
 ---
 
 ## 🏗 Synthetic Data Preparation
-
 We built synthetic datasets to simulate LinkedIn profiles, ensuring no real personal data is used.
 
 ### 1. **train_profiles.csv**
@@ -117,7 +116,6 @@ We built synthetic datasets to simulate LinkedIn profiles, ensuring no real pers
 ---
 
 ## 📂 Project Structure
-
 ```
 
 linkedin_cert_predictor/
@@ -125,12 +123,12 @@ linkedin_cert_predictor/
 ├── app/
 │   └── app_streamlit.py        \# Streamlit web UI
 ├── src/
-│   ├── config.py               \# Constants/config
+│   ├── config.py               \# Constants/config (includes RELEVANT_SKILLS whitelist)
 │   ├── preprocess.py           \# Text cleaning
 │   ├── matcher.py              \# Scenario 1 matching
 │   ├── embeddings.py           \# Embedding generation
 │   ├── reference_builder.py    \# Build \& save reference embeddings
-│   ├── scorer.py               \# Scenario 2 similarity scoring
+│   ├── scorer.py               \# Scenario 2 similarity scoring with skill filtering
 │   └── pipeline.py             \# End-to-end CSV → JSON pipeline
 ├── data/
 │   ├── train_profiles.csv
@@ -148,7 +146,6 @@ linkedin_cert_predictor/
 ---
 
 ## ⚙️ Installation & Setup
-
 ```
 
 git clone https://github.com/YOUR_USERNAME/linkedin_cert_predictor.git
@@ -167,7 +164,6 @@ python -m src.reference_builder
 ---
 
 ## 🚀 Usage
-
 **Run Pipeline on Test CSV:**
 ```
 
@@ -210,19 +206,18 @@ streamlit run app/app_streamlit.py
 ## 🔮 Future Improvements
 - Add color-coded visual rankings in Streamlit table.
 - Fine-tune weight between skill similarity and experience similarity.
+- Expand the RELEVANT_SKILLS whitelist for broader coverage.
 - Add more realistic certification name variants for better recall.
 - Optionally turn into a REST API with Flask.
 
 ---
+
 ## Example Images
-
-![Screenshot 1](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020423.png)
-
-![Screenshot 2](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020521.png)
-
-![Screenshot 3](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020632.png)
-
-![Screenshot 4](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-15%20020641.png)
+![Screenshot 1](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020423.png)
+![Screenshot 2](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020521.png)
+![Screenshot 3](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020632.png)
+![Screenshot 4](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020641.png)
+```
 
 
 
