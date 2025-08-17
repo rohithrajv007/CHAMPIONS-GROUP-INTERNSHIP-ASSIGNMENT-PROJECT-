@@ -217,7 +217,11 @@ streamlit run app/app_streamlit.py
 ![Screenshot 2](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020521.png)
 ![Screenshot 3](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020632.png)
 ![Screenshot 4](https://raw.githubusercontent.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/main/Screenshot%202025-08-15%20020641.png)
+![Screenshot 5](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-17%20154659.png)
+![Screenshot 6](https://github.com/rohithrajv007/CHAMPIONS-GROUP-INTERNSHIP-ASSIGNMENT-PROJECT-/blob/main/Screenshot%202025-08-17%20154712.png)
+
 ```
+
 
 
 
