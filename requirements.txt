@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 streamlit
 pandas
 numpy
@@ -5,3 +6,12 @@ scikit-learn
 sentence-transformers
 joblib
 rapidfuzz
+=======
+streamlit
+pandas
+numpy
+scikit-learn
+sentence-transformers
+joblib
+rapidfuzz
+>>>>>>> a6fa4ff1d204e356c4b780c3d00f94710568a9c4

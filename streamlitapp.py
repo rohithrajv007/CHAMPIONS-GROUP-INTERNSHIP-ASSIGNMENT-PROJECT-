@@ -14,7 +14,7 @@ from pinecone import Pinecone, ServerlessSpec
 # Configuration
 # ------------------------------------
 
-PINECONE_API_KEY = "pcsk_6Fs29f_9P573X2VuwQsHtJKz7L7hJcgAzvjzTjY7QnSkpRNhRK9fKkZLsWNdf6NHtfH7DX"
+PINECONE_API_KEY = "pinecone_api_key_here"  # Replace with your Pinecone API key
 PINECONE_CLOUD = "aws"
 PINECONE_REGION = "us-east-1"
 INDEX_NAME = "langchainvector"
